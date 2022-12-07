@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <h1>Welcome to the page {{current_user.name}} </h1>
+        <a href="{{ url_for('pics.upload') }}">upload</a>
+        <br>
+        {% for key,val in pictures.items() %}
+            <h1><a href="{{ url_for('pics.pictures',pic_id = val[3]) }}">{{val[2]}}</a></h1>
+            <img src="data:image/jpg;base64,{{val[1]}}" width="700" height="600">
+            <h1>{{val[0]}}</h1>
+            <br>
+            <br>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

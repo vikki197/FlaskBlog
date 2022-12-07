@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class = 'content-section'>
+   <form method = 'POST', action="">
+    {{supform.csrf_token}}
+    <fieldset class = 'form-group'>
+        <div class = 'form-group'>
+            {{supform.name.label(class="form-control-label")}}
+            {% if supform.name.errors %}
+                {{supform.name(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in supform.name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{supform.name(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{supform.mail.label(class="form-control-label")}}
+            {% if supform.mail.errors %}
+                {{supform.mail(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in supform.mail.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{supform.mail(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{supform.password.label(class="form-control-label")}}
+            {% if supform.password.errors %}
+                {{supform.password(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in supform.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{supform.password(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{supform.confirm_pass.label(class="form-control-label")}}
+            {% if supform.confirm_pass.errors %}
+                {{supform.confirm_pass(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in supform.confirm_pass.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{supform.confirm_pass(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{supform.submit(class="btn btn-outline-info")}}
+        </div>
+
+        <div>
+            <small class = 'text-muted'>
+                Already have an account <a class="ml-2" href = "{{url_for('users.login')}}">Sign In</a>
+            </small>
+        </div>
+    </fieldset>
+
+</form>
+</div>
+
+{% endblock %}

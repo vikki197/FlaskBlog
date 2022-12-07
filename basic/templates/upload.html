@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST", action="", enctype="multipart/form-data">
+        {{uplform.csrf_token}}
+        <fieldset class = 'form-group'>
+            <div class = 'form-group'>
+                {{uplform.name.label(class="form-control-label")}}
+                {% if uplform.name.errors %}
+                    {{uplform.name(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in uplform.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{uplform.name(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+
+            <div class = 'form-group'>
+                {{uplform.desc.label(class="form-control-label")}}
+                {% if uplform.desc.errors %}
+                    {{uplform.desc(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in uplform.desc.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{uplform.desc(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+
+            <div class = 'form-group'>
+                {{uplform.image.label(class="form-control-label")}}
+                {{uplform.image(class="form-control-file")}}
+                {% if uplform.image.errors %}
+                    {% for error in uplform.image.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class = 'form-group'>
+                {{uplform.submit(class="btn btn-outline-info")}}
+            </div>
+        </fieldset>
+        </form>
+    </div>
+{% endblock %}

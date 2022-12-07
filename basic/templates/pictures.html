@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1> Welcome to the picture</h1>
+    <img src="data:image/jpg;base64,{{pics[0][1]}}" width="400" height="300">
+    <br>
+    <br>
+     <div class = 'content-section'>
+        <form method = 'POST', action="">
+            {{picform.csrf_token}}
+            <fieldset class = 'form-group'>
+            <div class = 'form-group'>
+                {{picform.name.label(class="form-control-label")}}
+                {% if picform.name.errors %}
+                    {{picform.name(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in picform.name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{picform.name(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+
+            <div class = 'form-group'>
+                {{picform.desc.label(class="form-control-label")}}
+                {% if picform.desc.errors %}
+                    {{picform.desc(class="form-control form-control-lg is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in picform.desc.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{picform.desc(class="form-control form-control-lg")}}
+                {% endif %}
+            </div>
+
+            <div class = 'form-group'>
+                {{picform.submit(class="btn btn-outline-info")}}
+            </div>
+            </fieldset>
+        </form>
+         <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+         <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete the picture and it's contents
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Without Deleting</button>
+          <form action="{{ url_for('pics.delete',pic_id=pics[0][3]) }}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Delete">
+         </form>
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+{% endblock %}

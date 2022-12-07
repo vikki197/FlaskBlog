@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" src="/static/profile.png">
+            <div class = 'media-body'>
+                <h2 class="account-heading">{{ current_user.name }}</h2>
+                <p class="text-secondary">{{ current_user.mail }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class = 'content-section'>
+    <form method = 'POST', action="">
+    {{actform.csrf_token}}
+    <fieldset class = 'form-group'>
+        <div class = 'form-group'>
+            {{actform.name.label(class="form-control-label")}}
+            {% if actform.name.errors %}
+                {{actform.name(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in actform.name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{actform.name(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{actform.mail.label(class="form-control-label")}}
+            {% if actform.mail.errors %}
+                {{actform.mail(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in actform.mail.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{actform.mail(class="form-control form-control-lg")}}
+            {% endif %}
+        </div>
+
+        <div class = 'form-group'>
+            {{actform.submit(class="btn btn-outline-info")}}
+        </div>
+    </fieldset>
+</form>
+    </div>
+{% endblock %}
